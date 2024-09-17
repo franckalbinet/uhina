@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "uhina"
+  site-url: "https://franckalbinet.github.io/uhina"
+  description: "1D to 2D (Continuous Wavelet Transform) infrared spectra converter"
+  repo-branch: main
+  repo-url: "https://github.com/franckalbinet/uhina"
