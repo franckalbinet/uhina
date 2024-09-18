@@ -1,5 +1,7 @@
 _docs/
+_data/
 _proc/
+dump/
 
 *.bak
 .gitattributes
@@ -26,7 +28,6 @@ __pycache__/
 .Python
 env/
 build/
-conda/
 develop-eggs/
 dist/
 downloads/
