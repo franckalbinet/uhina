@@ -51,17 +51,22 @@ find package manager specific guidelines o
 
 ## How to use
 
-\`\`\`bash usage: uh \[-h\] \[–img_dir IMG_DIR\] \[–dataset DATASET\]
-\[–spectra_type SPECTRA_TYPE\] \[–analytes ANALYTES\] \[–n_samples
-N_SAMPLES\] \[–batch_size BATCH_SIZE\] src dir_out
+``` sh
+usage: uh [-h] [--img_dir IMG_DIR] [--dataset DATASET] [--spectra_type SPECTRA_TYPE] [--analytes ANALYTES] [--n_samples N_SAMPLES] [--batch_size BATCH_SIZE]
+          src dir_out
 
 Convert spectra to wavelet images.
 
-positional arguments: src Source file dir_out Output root directory
+positional arguments:
+  src                          Source file
+  dir_out                      Output root directory
 
-options: -h, –help show this help message and exit –img_dir IMG_DIR
-Image directory (default: img) –dataset DATASET Dataset to use (default:
-ossl) –spectra_type SPECTRA_TYPE Spectra type to use (default: mir)
-–analytes ANALYTES Analytes to use (default: k.ext_usda.a725_cmolc.kg)
-–n_samples N_SAMPLES Number of samples to use –batch_size BATCH_SIZE
-Batch size to use (default: 10)
+options:
+  -h, --help                   show this help message and exit
+  --img_dir IMG_DIR            Image directory (default: img)
+  --dataset DATASET            Dataset to use (default: ossl)
+  --spectra_type SPECTRA_TYPE  Spectra type to use (default: mir)
+  --analytes ANALYTES          Analytes to use (default: k.ext_usda.a725_cmolc.kg)
+  --n_samples N_SAMPLES        Number of samples to use
+  --batch_size BATCH_SIZE      Batch size to use (default: 10)
+```
