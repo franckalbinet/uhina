@@ -6,21 +6,57 @@
 __all__ = ['fname_ossl', 'OSSLLoader']
 
 # %% ../nbs/00_loading.ipynb 2
+import fastcore.all as fc
 import pandas as pd
 from pathlib import Path
 from sklearn.preprocessing import LabelEncoder
 import numpy as np
 import re
 
-# %% ../nbs/00_loading.ipynb 4
+# %% ../nbs/00_loading.ipynb 3
 fname_ossl = Path.home() / '.lssm/data/ossl/ossl_all_L0_v1.2.csv.gz'
 
-# %% ../nbs/00_loading.ipynb 5
+# %% ../nbs/00_loading.ipynb 4
 class OSSLLoader:
     "Load OSSL data and filter it by spectra type and analytes of interest."
     CFGS = {
         'visnir': {'ref_col': 'scan_visnir.1500_ref', 'range': [400, 2500]},
         'mir': {'ref_col': 'scan_mir.1500_abs', 'range': [600, 4000]}
+    }
+    
+    DTYPE_DICT = {
+        'id.layer_local_c': 'object',
+        'id.location_olc_txt': 'object',
+        'id.dataset.site_ascii_txt': 'object',
+        'id.scan_local_c': 'object',
+        'layer.texture_usda_txt': 'object',
+        'pedon.taxa_usda_txt': 'object',
+        'horizon.designation_usda_txt': 'object',
+        'location.country_iso.3166_txt': 'object',
+        'surveyor.address_utf8_txt': 'object',
+        'efferv_usda.a479_class': 'object',
+        'scan.mir.date.begin_iso.8601_yyyy.mm.dd': 'object',
+        'scan.mir.date.end_iso.8601_yyyy.mm.dd': 'object',
+        'scan.mir.model.name_utf8_txt': 'object',
+        'scan.mir.model.code_any_txt': 'object',
+        'scan.mir.method.optics_any_txt': 'object',
+        'scan.mir.method.preparation_any_txt': 'object',
+        'scan.mir.license.title_ascii_txt': 'object',
+        'scan.mir.license.address_idn_url': 'object',
+        'scan.mir.doi_idf_url': 'object',
+        'scan.mir.contact.name_utf8_txt': 'object',
+        'scan.mir.contact.email_ietf_txt': 'object',
+        'scan.visnir.date.begin_iso.8601_yyyy.mm.dd': 'object',
+        'scan.visnir.date.end_iso.8601_yyyy.mm.dd': 'object',
+        'scan.visnir.model.name_utf8_txt': 'object',
+        'scan.visnir.model.code_any_txt': 'object',
+        'scan.visnir.method.optics_any_txt': 'object',
+        'scan.visnir.method.preparation_any_txt': 'object',
+        'scan.visnir.license.title_ascii_txt': 'object',
+        'scan.visnir.license.address_idn_url': 'object',
+        'scan.visnir.doi_idf_url': 'object',
+        'scan.visnir.contact.name_utf8_txt': 'object',
+        'scan.visnir.contact.email_ietf_txt': 'object'
     }
 
     def __init__(self, fname: Path = Path.home() / '.lssm/data/ossl/ossl_all_L0_v1.2.csv.gz'):
@@ -31,7 +67,8 @@ class OSSLLoader:
     def load_data(self, analytes: str|list, spectra_type: str = 'visnir', debug: bool = False):
         """Load OSSL data and filter it by spectra type and analytes of interest"""
         print(f'Loading data from {self.fname} ...')
-        self.df = pd.read_csv(self.fname, compression='infer', low_memory=True)
+        self.df = pd.read_csv(self.fname, dtype=self.DTYPE_DICT,
+                              compression='infer', low_memory=True)
 
         if debug:
             return self.df
