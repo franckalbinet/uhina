@@ -7,7 +7,11 @@ __all__ = ['main']
 
 # %% ../nbs/03_cli.ipynb 2
 from fastcore.script import *
-from .wavelets import convert_to_wavelet_images, create_image_target_csv
+import numpy as np
+from .wavelets import (
+    convert_to_wavelet_images, 
+    create_image_target_csv, 
+    estimate_percentiles)
 from sklearn.pipeline import Pipeline
 from .preprocessing import SNV, TakeDerivative
 from .loading import OSSLLoader
@@ -24,7 +28,7 @@ def main(
     analytes: str='k.ext_usda.a725_cmolc.kg', # Analytes to use
     n_samples: int=None, # Number of samples to use
     batch_size: int=10, # Batch size to use
-
+    # n_percentile_estimate: int=1000, # Number of samples to use to estimate percentiles
     ):
     "Convert spectra to wavelet images."
     
@@ -46,7 +50,14 @@ def main(
     print(f'Creating image target csv in {dir_out} ...')
     create_image_target_csv(smp_idx, y, n_samples=n_samples, output_dir=dir_out)  
     
+    # percentiles = np.linspace(0, 99.9, 255)
+    # print(f'Estimating CWT powers percentiles ...')
+    # percentiles_result = estimate_percentiles(X_trans, 
+    #                                           n_samples=n_percentile_estimate,
+    #                                           percentiles=percentiles)
+    
     print(f'Creating wavelet images in {dir_out} ...')
     convert_to_wavelet_images(X_trans, smp_idx, wavenumbers, 
                               output_dir=Path(dir_out)/img_dir, 
+                            #   plot_kwargs={'levels': percentiles_result},
                               n_samples=n_samples, batch_size=batch_size)
