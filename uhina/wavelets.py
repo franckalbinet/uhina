@@ -55,9 +55,8 @@ class CWT:
         self.get_period()
         return self
 
-# %% ../nbs/02_wavelets.ipynb 6
-def plot_cwt(cwt, wavenumbers, 
-            #  levels=None, 
+# %% ../nbs/02_wavelets.ipynb 5
+def plot_cwt(cwt, wavenumbers,
              dt=2, 
              figprops=dict(figsize=(6, 2), dpi=144), tight=True, 
              fontsize=8, title='', cmap=plt.cm.grey, save_path=None, 
@@ -117,10 +116,10 @@ def plot_cwt(cwt, wavenumbers,
     
         # Create a new colorbar with correct logarithmic scaling
         # cbar = plt.colorbar(contourf, ax=ax, ticks=log2_levels)
-        cbar = plt.colorbar(im, ax=ax, ticks=log2_levels)
-        cbar.ax.set_yticklabels([f'{2**x:.1e}' for x in log2_levels])
-        cbar.ax.tick_params(labelsize=fontsize-2)
-        cbar.set_label('Power', fontsize=fontsize)
+        # cbar = plt.colorbar(im, ax=ax, ticks=log2_levels)
+        # cbar.ax.set_yticklabels([f'{2**x:.1e}' for x in log2_levels])
+        # cbar.ax.tick_params(labelsize=fontsize-2)
+        # cbar.set_label('Power', fontsize=fontsize)
     
     if save_path:
         ax.axis('off')
@@ -138,6 +137,21 @@ def plot_cwt(cwt, wavenumbers,
         plt.show()
     else:
         plt.close(fig)  # Close the figure without displaying it
+
+# %% ../nbs/02_wavelets.ipynb 8
+import numpy as np
+
+class OnlinePercentileEstimator:
+    def __init__(self, percentiles):
+        self.percentiles = percentiles
+        self.values = []
+
+    def update(self, array):
+        self.values.extend(array.flatten())
+
+    def calculate_percentiles(self):
+        self.values = np.array(self.values)
+        return np.percentile(self.values, self.percentiles)
 
 # %% ../nbs/02_wavelets.ipynb 11
 class OnlinePercentileEstimator:
@@ -179,12 +193,12 @@ def estimate_percentiles(X_trans,
     return estimator.calculate_percentiles()
 
 
-# %% ../nbs/02_wavelets.ipynb 20
+# %% ../nbs/02_wavelets.ipynb 16
 def estimate_conversion_time(seconds=1000, samples=1000):
     "Estimate the time to convert all spectra to images."
     return seconds * (samples / 1000) / 60
 
-# %% ../nbs/02_wavelets.ipynb 21
+# %% ../nbs/02_wavelets.ipynb 17
 def create_image_target_csv(smp_idx: np.ndarray, # sample indices     
                             y: np.ndarray, # target values
                             n_samples: int = None, # number of samples to process
@@ -201,12 +215,12 @@ def create_image_target_csv(smp_idx: np.ndarray, # sample indices
     
     pd.DataFrame(items).to_csv(Path(output_dir) / fname, index=False)
 
-# %% ../nbs/02_wavelets.ipynb 23
+# %% ../nbs/02_wavelets.ipynb 19
 def create_output_directory(output_dir):
     "Create the output directory if it does not exist."
     os.makedirs(output_dir, exist_ok=True)
 
-# %% ../nbs/02_wavelets.ipynb 24
+# %% ../nbs/02_wavelets.ipynb 20
 def process_single_sample(args):
     "Process a single sample and save the wavelet image to the output directory."
     i, id, X_trans_i, wavenumbers, output_dir, cwt_kwargs, plot_kwargs = args
@@ -215,14 +229,14 @@ def process_single_sample(args):
     plot_cwt(cwt_result, wavenumbers=wavenumbers, 
              save_path=fname_img, show_plot=False, **plot_kwargs)
 
-# %% ../nbs/02_wavelets.ipynb 25
+# %% ../nbs/02_wavelets.ipynb 21
 def batch_indices(n_samples: int, batch_size: int) -> range:
     "Generate batch indices for processing."
     for start in range(0, n_samples, batch_size):
         end = min(start + batch_size, n_samples)
         yield range(start, end)
 
-# %% ../nbs/02_wavelets.ipynb 26
+# %% ../nbs/02_wavelets.ipynb 22
 def convert_to_wavelet_images(X_trans: np.ndarray,
                               smp_idx: np.ndarray,
                               wavenumbers: np.ndarray,

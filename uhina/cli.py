@@ -50,12 +50,6 @@ def main(
     print(f'Creating image target csv in {dir_out} ...')
     create_image_target_csv(smp_idx, y, n_samples=n_samples, output_dir=dir_out)  
     
-    # percentiles = np.linspace(0, 99.9, 255)
-    # print(f'Estimating CWT powers percentiles ...')
-    # percentiles_result = estimate_percentiles(X_trans, 
-    #                                           n_samples=n_percentile_estimate,
-    #                                           percentiles=percentiles)
-    
     print(f'Creating wavelet images in {dir_out} ...')
     convert_to_wavelet_images(X_trans, smp_idx, wavenumbers, 
                               output_dir=Path(dir_out)/img_dir, 
