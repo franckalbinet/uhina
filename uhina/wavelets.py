@@ -138,7 +138,7 @@ def plot_cwt(cwt, wavenumbers,
     else:
         plt.close(fig)  # Close the figure without displaying it
 
-# %% ../nbs/02_wavelets.ipynb 8
+# %% ../nbs/02_wavelets.ipynb 9
 import numpy as np
 
 class OnlinePercentileEstimator:
@@ -153,7 +153,7 @@ class OnlinePercentileEstimator:
         self.values = np.array(self.values)
         return np.percentile(self.values, self.percentiles)
 
-# %% ../nbs/02_wavelets.ipynb 11
+# %% ../nbs/02_wavelets.ipynb 12
 class OnlinePercentileEstimator:
     "Estimate the percentiles of the power of the wavelet transform of the spectra."
     def __init__(self, percentiles, n_samples=1000):
@@ -180,7 +180,7 @@ class OnlinePercentileEstimator:
             combined_values = self.values[:self.current_index, :]
         return np.percentile(combined_values.flatten(), self.percentiles, axis=0)
 
-# %% ../nbs/02_wavelets.ipynb 12
+# %% ../nbs/02_wavelets.ipynb 13
 def estimate_percentiles(X_trans, 
                          n_samples=100, 
                          percentiles=[10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 99]):
@@ -193,17 +193,17 @@ def estimate_percentiles(X_trans,
     return estimator.calculate_percentiles()
 
 
-# %% ../nbs/02_wavelets.ipynb 16
+# %% ../nbs/02_wavelets.ipynb 17
 def estimate_conversion_time(seconds=1000, samples=1000):
     "Estimate the time to convert all spectra to images."
     return seconds * (samples / 1000) / 60
 
-# %% ../nbs/02_wavelets.ipynb 17
+# %% ../nbs/02_wavelets.ipynb 18
 def create_image_target_csv(smp_idx: np.ndarray, # sample indices     
                             y: np.ndarray, # target values
                             n_samples: int = None, # number of samples to process
                             output_dir: str = '../_data/ossl-tfm/', # path to save the CSV file
-                            fname:str = 'ossl-tfm.csv'
+                            fname:str = 'im-targets-lut.csv'
                             ) -> None: 
     "Create a CSV file with the image names and the target values."
     n_samples = len(smp_idx) if n_samples is None else n_samples
@@ -213,14 +213,15 @@ def create_image_target_csv(smp_idx: np.ndarray, # sample indices
         'kex': [np.log1p(y[i].item()) for i in range(n_samples)]
     }
     
-    pd.DataFrame(items).to_csv(Path(output_dir) / fname, index=False)
+    df = pd.DataFrame(items).dropna()
+    df.to_csv(Path(output_dir) / fname, index=False)
 
-# %% ../nbs/02_wavelets.ipynb 19
+# %% ../nbs/02_wavelets.ipynb 20
 def create_output_directory(output_dir):
     "Create the output directory if it does not exist."
     os.makedirs(output_dir, exist_ok=True)
 
-# %% ../nbs/02_wavelets.ipynb 20
+# %% ../nbs/02_wavelets.ipynb 21
 def process_single_sample(args):
     "Process a single sample and save the wavelet image to the output directory."
     i, id, X_trans_i, wavenumbers, output_dir, cwt_kwargs, plot_kwargs = args
@@ -229,18 +230,18 @@ def process_single_sample(args):
     plot_cwt(cwt_result, wavenumbers=wavenumbers, 
              save_path=fname_img, show_plot=False, **plot_kwargs)
 
-# %% ../nbs/02_wavelets.ipynb 21
+# %% ../nbs/02_wavelets.ipynb 22
 def batch_indices(n_samples: int, batch_size: int) -> range:
     "Generate batch indices for processing."
     for start in range(0, n_samples, batch_size):
         end = min(start + batch_size, n_samples)
         yield range(start, end)
 
-# %% ../nbs/02_wavelets.ipynb 22
+# %% ../nbs/02_wavelets.ipynb 23
 def convert_to_wavelet_images(X_trans: np.ndarray,
                               smp_idx: np.ndarray,
                               wavenumbers: np.ndarray,
-                              output_dir: str = '../_data/img',
+                              output_dir: str = '../_data/im',
                               cwt_kwargs: dict = None,
                               plot_kwargs: dict = None,
                               n_samples: int = None,
