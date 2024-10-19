@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Load data from spectral libraries.">
+
+<title>Loading – uhina</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Loading – uhina">
+<meta property="og:description" content="Load data from spectral libraries.">
+<meta property="og:site_name" content="uhina">
+<meta name="twitter:title" content="Loading – uhina">
+<meta name="twitter:description" content="Load data from spectral libraries.">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">uhina</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools tools-end">
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./loading.html">Loading</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Uhina</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./loading.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Loading</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preprocessing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preprocessing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wavelets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Continuous Wavelet Transform</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cli.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Command Line Interface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./augment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data augmentation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">example</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./example/fastai-bw-augment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fastai BW data augmentation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./example/fastai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fastai example</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./example/fk-jumpei-classic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fukushima Jumpei classic</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./example/fk-jumpei-transfer-learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fukushima Jumpei transfer learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./example/ossl-vs-fk-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">OSSL vs Ringtrial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./example/ossl-vs-ringtrial-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">OSSL vs Ringtrial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./example/ringtrial-classic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ringtrial classic</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./example/ringtrial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ringtrial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">history_runpod</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./example/history_runpod/fastai-bw-augment-03-10-2024.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fastai BW data augmentation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./example/history_runpod/fastai-bw-augment-12-10-2024.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fastai BW data augmentation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#plot_spectra" id="toc-plot_spectra" class="nav-link active" data-scroll-target="#plot_spectra">plot_spectra</a></li>
+  <li><a href="#spectraldata" id="toc-spectraldata" class="nav-link" data-scroll-target="#spectraldata">SpectralData</a></li>
+  <li><a href="#dataloader" id="toc-dataloader" class="nav-link" data-scroll-target="#dataloader">DataLoader</a></li>
+  <li><a href="#ossl-loader" id="toc-ossl-loader" class="nav-link" data-scroll-target="#ossl-loader">OSSL loader</a>
+  <ul class="collapse">
+  <li><a href="#osslloader" id="toc-osslloader" class="nav-link" data-scroll-target="#osslloader">OSSLLoader</a></li>
+  </ul></li>
+  <li><a href="#fukushima-jumpei-data" id="toc-fukushima-jumpei-data" class="nav-link" data-scroll-target="#fukushima-jumpei-data">Fukushima (Jumpei) data</a>
+  <ul class="collapse">
+  <li><a href="#fukushimajumpeiloader" id="toc-fukushimajumpeiloader" class="nav-link" data-scroll-target="#fukushimajumpeiloader">FukushimaJumpeiLoader</a></li>
+  </ul></li>
+  <li><a href="#ringtrial-data" id="toc-ringtrial-data" class="nav-link" data-scroll-target="#ringtrial-data">Ringtrial data</a>
+  <ul class="collapse">
+  <li><a href="#ringtrialloader" id="toc-ringtrialloader" class="nav-link" data-scroll-target="#ringtrialloader">RingtrialLoader</a></li>
+  </ul></li>
+  <li><a href="#loader-factory" id="toc-loader-factory" class="nav-link" data-scroll-target="#loader-factory">Loader factory</a>
+  <ul class="collapse">
+  <li><a href="#loaderfactory" id="toc-loaderfactory" class="nav-link" data-scroll-target="#loaderfactory">LoaderFactory</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/franckalbinet/uhina/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="loading.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Loading</h1>
+</div>
+
+<div>
+  <div class="description">
+    Load data from spectral libraries.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<hr>
+<p><a href="https://github.com/franckalbinet/uhina/blob/main/uhina/loading.py#L24" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="plot_spectra" class="level3">
+<h3 class="anchored" data-anchor-id="plot_spectra">plot_spectra</h3>
+<blockquote class="blockquote">
+<pre><code> plot_spectra (data, var:str='X', n_spectra=None, snv:bool=False,
+               xlabel='Wavenumber ($cm^{-1}$)', ylabel='Absorbance',
+               figsize=(12, 4), locator=250, lw=1, color='steelblue',
+               alpha=0.1, tight_layout=False)</code></pre>
+</blockquote>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>var</td>
+<td>str</td>
+<td>X</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>n_spectra</td>
+<td>NoneType</td>
+<td>None</td>
+<td>Number of random spectra to plot (None for all)</td>
+</tr>
+<tr class="even">
+<td>snv</td>
+<td>bool</td>
+<td>False</td>
+<td>Apply SNV normalization</td>
+</tr>
+<tr class="odd">
+<td>xlabel</td>
+<td>str</td>
+<td>Wavenumber (<span class="math inline">\(cm\^{-1}\)</span>)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>ylabel</td>
+<td>str</td>
+<td>Absorbance</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>figsize</td>
+<td>tuple</td>
+<td>(12, 4)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>locator</td>
+<td>int</td>
+<td>250</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>lw</td>
+<td>int</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>color</td>
+<td>str</td>
+<td>steelblue</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>alpha</td>
+<td>float</td>
+<td>0.1</td>
+<td>Single color with opacity</td>
+</tr>
+<tr class="even">
+<td>tight_layout</td>
+<td>bool</td>
+<td>False</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-3" class="cell" data-execution_count="19">
+<details open="" class="code-fold">
+<summary>Exported source</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_spectra(data, </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                 var: <span class="bu">str</span> <span class="op">=</span> <span class="st">'X'</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                 n_spectra<span class="op">=</span><span class="va">None</span>,  <span class="co"># Number of random spectra to plot (None for all)</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                 snv: <span class="bu">bool</span> <span class="op">=</span> <span class="va">False</span>, <span class="co"># Apply SNV normalization</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                 xlabel<span class="op">=</span><span class="st">'Wavenumber ($cm^{-1}$)'</span>, ylabel<span class="op">=</span><span class="st">'Absorbance'</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                 figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">4</span>), locator<span class="op">=</span><span class="dv">250</span>, lw<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                 color<span class="op">=</span><span class="st">'steelblue'</span>, alpha<span class="op">=</span><span class="fl">0.1</span>,  <span class="co"># Single color with opacity</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                 tight_layout<span class="op">=</span><span class="va">False</span>):</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>figsize)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    X_data <span class="op">=</span> <span class="bu">getattr</span>(data, var)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n_spectra <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="kw">and</span> n_spectra <span class="op">&lt;</span> data.X.shape[<span class="dv">0</span>]:</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Select n random spectra</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        indices <span class="op">=</span> np.random.choice(X_data.shape[<span class="dv">0</span>], n_spectra, replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        X_subset <span class="op">=</span> X_data[indices]</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        X_subset <span class="op">=</span> X_data</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    X_subset <span class="op">=</span> SNV().fit_transform(X_subset) <span class="cf">if</span> snv <span class="cf">else</span> X_subset</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(X_subset.shape[<span class="dv">0</span>]):</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        ax.plot(data.X_names, X_subset[i], lw<span class="op">=</span>lw, color<span class="op">=</span>color, alpha<span class="op">=</span>alpha)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_major_locator(plt.MultipleLocator(locator))</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    ax.grid(<span class="va">True</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    ax.invert_xaxis()</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(xlabel)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(ylabel)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> tight_layout:</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>        plt.tight_layout()</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig, ax</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<hr>
+<p><a href="https://github.com/franckalbinet/uhina/blob/main/uhina/loading.py#L62" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="spectraldata" class="level3">
+<h3 class="anchored" data-anchor-id="spectraldata">SpectralData</h3>
+<blockquote class="blockquote">
+<pre><code> SpectralData (X:numpy.ndarray, X_names:numpy.ndarray, y:numpy.ndarray,
+               y_names:numpy.ndarray, sample_indices:numpy.ndarray,
+               dataset_names:numpy.ndarray, dataset_labels:numpy.ndarray)</code></pre>
+</blockquote>
+<div id="cell-5" class="cell">
+<details open="" class="code-fold">
+<summary>Exported source</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SpectralData:</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    X: np.ndarray</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    X_names: np.ndarray</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    y: np.ndarray</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    y_names: np.ndarray</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    sample_indices: np.ndarray</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    dataset_names: np.ndarray</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    dataset_labels: np.ndarray</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<hr>
+<p><a href="https://github.com/franckalbinet/uhina/blob/main/uhina/loading.py#L75" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="dataloader" class="level3">
+<h3 class="anchored" data-anchor-id="dataloader">DataLoader</h3>
+<blockquote class="blockquote">
+<pre><code> DataLoader ()</code></pre>
+</blockquote>
+<p><em>Abstract class for data loading.</em></p>
+<div id="cell-7" class="cell">
+<details open="" class="code-fold">
+<summary>Exported source</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fname_ossl <span class="op">=</span> Path.home() <span class="op">/</span> <span class="st">'.lssm/data/ossl/ossl_all_L0_v1.2.csv.gz'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="cell-8" class="cell">
+<details open="" class="code-fold">
+<summary>Exported source</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DataLoader(ABC):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"Abstract class for data loading."</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">@abstractmethod</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> load_data(<span class="va">self</span>, </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                  analytes: <span class="bu">str</span><span class="op">|</span><span class="bu">list</span>, <span class="co"># Analyte(s) of interest</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                  ) <span class="op">-&gt;</span> <span class="bu">tuple</span>: <span class="co"># Return a tuple of the form (X, y, X_names, smp_idx, ds_name, ds_label)</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Load data and return (X, y, X_names, smp_idx, ds_name, ds_label)."""</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">pass</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="ossl-loader" class="level2">
+<h2 class="anchored" data-anchor-id="ossl-loader">OSSL loader</h2>
+<p>Describe OSSL …</p>
+<hr>
+<p><a href="https://github.com/franckalbinet/uhina/blob/main/uhina/loading.py#L85" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="osslloader" class="level3">
+<h3 class="anchored" data-anchor-id="osslloader">OSSLLoader</h3>
+<blockquote class="blockquote">
+<pre><code> OSSLLoader (src:pathlib.Path=Path('/home/runner/.lssm/data/ossl/ossl_all_
+             L0_v1.2.csv.gz'), spectra_type:str='visnir', cfgs:dict=None)</code></pre>
+</blockquote>
+<p><em>Load OSSL data and filter it by spectra type and analytes of interest.</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>src</td>
+<td>Path</td>
+<td>/home/runner/.lssm/data/ossl/ossl_all_L0_v1.2.csv.gz</td>
+<td>Data source file name</td>
+</tr>
+<tr class="even">
+<td>spectra_type</td>
+<td>str</td>
+<td>visnir</td>
+<td>Spectra type</td>
+</tr>
+<tr class="odd">
+<td>cfgs</td>
+<td>dict</td>
+<td>None</td>
+<td>Spectra type configuration</td>
+</tr>
+</tbody>
+</table>
+<div id="cell-12" class="cell">
+<details open="" class="code-fold">
+<summary>Exported source</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> OSSLLoader(DataLoader):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"Load OSSL data and filter it by spectra type and analytes of interest."</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    DTYPE_DICT <span class="op">=</span> {</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'id.layer_local_c'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">'id.location_olc_txt'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">'id.dataset.site_ascii_txt'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">'id.scan_local_c'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">'layer.texture_usda_txt'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">'pedon.taxa_usda_txt'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">'horizon.designation_usda_txt'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">'location.country_iso.3166_txt'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">'surveyor.address_utf8_txt'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">'efferv_usda.a479_class'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.mir.date.begin_iso.8601_yyyy.mm.dd'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.mir.date.end_iso.8601_yyyy.mm.dd'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.mir.model.name_utf8_txt'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.mir.model.code_any_txt'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.mir.method.optics_any_txt'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.mir.method.preparation_any_txt'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.mir.license.title_ascii_txt'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.mir.license.address_idn_url'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.mir.doi_idf_url'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.mir.contact.name_utf8_txt'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.mir.contact.email_ietf_txt'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.visnir.date.begin_iso.8601_yyyy.mm.dd'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.visnir.date.end_iso.8601_yyyy.mm.dd'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.visnir.model.name_utf8_txt'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.visnir.model.code_any_txt'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.visnir.method.optics_any_txt'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.visnir.method.preparation_any_txt'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.visnir.license.title_ascii_txt'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.visnir.license.address_idn_url'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.visnir.doi_idf_url'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.visnir.contact.name_utf8_txt'</span>: <span class="st">'object'</span>,</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scan.visnir.contact.email_ietf_txt'</span>: <span class="st">'object'</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, </span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>                 src: Path <span class="op">=</span> Path.home() <span class="op">/</span> <span class="st">'.lssm/data/ossl/ossl_all_L0_v1.2.csv.gz'</span>, <span class="co"># Data source file name</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>                 spectra_type: <span class="bu">str</span><span class="op">=</span><span class="st">'visnir'</span>, <span class="co"># Spectra type</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>                 cfgs: <span class="bu">dict</span><span class="op">=</span><span class="va">None</span>): <span class="co"># Spectra type configuration</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.src <span class="op">=</span> src</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.spectra_type <span class="op">=</span> spectra_type</span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.ds_name_encoder <span class="op">=</span> LabelEncoder()</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.cfgs <span class="op">=</span> cfgs <span class="kw">or</span> {</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>            <span class="st">'visnir'</span>: {<span class="st">'ref_col'</span>: <span class="st">'scan_visnir.1500_ref'</span>, <span class="st">'range'</span>: [<span class="dv">400</span>, <span class="dv">2500</span>]},</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>            <span class="st">'mir'</span>: {<span class="st">'ref_col'</span>: <span class="st">'scan_mir.1500_abs'</span>, <span class="st">'range'</span>: [<span class="dv">650</span>, <span class="dv">4000</span>]}</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _get_spectra(<span class="va">self</span>, </span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>                    spectra_type: <span class="bu">str</span> <span class="co"># Spectra type</span></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>                    ):</span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>        cols_ref <span class="op">=</span> [name <span class="cf">for</span> name <span class="kw">in</span> <span class="va">self</span>.df.columns <span class="cf">if</span> <span class="ss">f'scan_</span><span class="sc">{</span>spectra_type<span class="sc">}</span><span class="ss">.'</span> <span class="kw">in</span> name]</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>        X <span class="op">=</span> <span class="va">self</span>.df[cols_ref].values</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>        X_names <span class="op">=</span> <span class="va">self</span>._get_wavelengths(spectra_type)</span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>        lower_limit, upper_limit <span class="op">=</span> <span class="va">self</span>.cfgs[spectra_type][<span class="st">'range'</span>]</span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>        idxs <span class="op">=</span> np.where((X_names <span class="op">&gt;=</span> lower_limit) <span class="op">&amp;</span> (X_names <span class="op">&lt;=</span> upper_limit))[<span class="dv">0</span>]</span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> X[:, idxs], X_names[idxs]</span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _encode_dataset_names(<span class="va">self</span>):</span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.ds_name_encoder.fit_transform(<span class="va">self</span>.df[<span class="st">'dataset.code_ascii_txt'</span>])</span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _get_wavelengths(<span class="va">self</span>, </span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>                            spectra_type: <span class="bu">str</span> <span class="co"># Spectra type</span></span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>                            ):</span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>        pattern <span class="op">=</span> <span class="vs">r"scan_</span><span class="sc">{}</span><span class="vs">\.(\d+)_"</span>.<span class="bu">format</span>(spectra_type)</span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.array([<span class="bu">int</span>(re.search(pattern, name).group(<span class="dv">1</span>)) <span class="cf">for</span> name <span class="kw">in</span> <span class="va">self</span>.df.columns</span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>                            <span class="cf">if</span> re.search(pattern, name)])</span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> load_data(<span class="va">self</span>, </span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>                  analytes: <span class="bu">str</span><span class="op">|</span><span class="bu">list</span>, <span class="co"># Analyte(s) of interest</span></span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>                  ) <span class="op">-&gt;</span> <span class="bu">tuple</span>: <span class="co"># Return a tuple of the form (X, y, X_names, smp_idx, ds_name, ds_label)</span></span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>        <span class="co">"Load OSSL data and filter it by spectra type and analytes of interest."</span></span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'Loading data from </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>src<span class="sc">}</span><span class="ss"> ...'</span>)</span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> pd.read_csv(<span class="va">self</span>.src, dtype<span class="op">=</span><span class="va">self</span>.DTYPE_DICT,</span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a>                              compression<span class="op">=</span><span class="st">'infer'</span>, low_memory<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a>        analytes <span class="op">=</span> [analytes] <span class="cf">if</span> <span class="bu">isinstance</span>(analytes, <span class="bu">str</span>) <span class="cf">else</span> analytes</span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a>        y_names <span class="op">=</span> np.array(analytes)</span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a>        subset <span class="op">=</span> analytes <span class="op">+</span> [<span class="va">self</span>.cfgs[<span class="va">self</span>.spectra_type][<span class="st">'ref_col'</span>]]</span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> <span class="va">self</span>.df.dropna(subset<span class="op">=</span>subset, how<span class="op">=</span><span class="st">'any'</span>)</span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a>        X, X_names <span class="op">=</span> <span class="va">self</span>._get_spectra(<span class="va">self</span>.spectra_type)</span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> <span class="va">self</span>.df[analytes].values</span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a>        smp_indices <span class="op">=</span> <span class="va">self</span>.df[<span class="st">'id.layer_uuid_txt'</span>].values</span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a>        ds_name <span class="op">=</span> <span class="va">self</span>._encode_dataset_names()</span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> SpectralData(</span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a>            X<span class="op">=</span>X,</span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a>            X_names<span class="op">=</span>X_names,</span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span>y,</span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a>            y_names<span class="op">=</span>y_names,</span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a>            sample_indices<span class="op">=</span>smp_indices,</span>
+<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a>            dataset_names<span class="op">=</span>ds_name,</span>
+<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a>            dataset_labels<span class="op">=</span><span class="va">self</span>.ds_name_encoder.classes_</span>
+<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a>        <span class="co"># return X, y, X_names, smp_idx, ds_name, self.ds_name_encoder.classes_, np.array(analytes)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Usage example:</p>
+<div id="cell-14" class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>src <span class="op">=</span> Path.home() <span class="op">/</span> <span class="st">'.lssm/data/ossl/ossl_all_L0_v1.2.csv.gz'</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>loader <span class="op">=</span> OSSLLoader(src<span class="op">=</span>src, spectra_type<span class="op">=</span><span class="st">'mir'</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>analytes <span class="op">=</span> <span class="st">'k.ext_usda.a725_cmolc.kg'</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> loader.load_data(analytes)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'X shape: </span><span class="sc">{</span>data<span class="sc">.</span>X<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y shape: </span><span class="sc">{</span>data<span class="sc">.</span>y<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'wavenumbers: </span><span class="sc">{</span>data<span class="sc">.</span>X_names<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Analytes: </span><span class="sc">{</span>data<span class="sc">.</span>y_names<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'smp_idx: </span><span class="sc">{</span>data<span class="sc">.</span>sample_indices<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'ds_name: </span><span class="sc">{</span>data<span class="sc">.</span>dataset_names<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'ds_label: </span><span class="sc">{</span>data<span class="sc">.</span>dataset_labels<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Loading data from /Users/franckalbinet/.lssm/data/ossl/ossl_all_L0_v1.2.csv.gz ...
+X shape: (57674, 1676)
+y shape: (57674, 1)
+wavenumbers: [ 650  652  654 ... 3996 3998 4000]
+Analytes: ['k.ext_usda.a725_cmolc.kg']
+smp_idx: ['3998362dd2659e2252cd7f38b43c9b1f' '2bab4dbbac073b8648475ad50d40eb95'
+ '29213d2193232be8867d85dec463ec00' ... 'b790da349d49885c5727a2b5fd67b13d'
+ 'a057a7ead9eebce24d4039de7fd5e01b' '80bf4a0dc30f60552a38193d5c09b9cd']
+ds_name: [0 0 0 ... 3 3 3]
+ds_label: ['GARRETT.SSL' 'ICRAF.ISRIC' 'KSSL.SSL' 'LUCAS.WOODWELL.SSL']</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="fukushima-jumpei-data" class="level2">
+<h2 class="anchored" data-anchor-id="fukushima-jumpei-data">Fukushima (Jumpei) data</h2>
+<p>Describe Jumpei’s data</p>
+<hr>
+<p><a href="https://github.com/franckalbinet/uhina/blob/main/uhina/loading.py#L185" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="fukushimajumpeiloader" class="level3">
+<h3 class="anchored" data-anchor-id="fukushimajumpeiloader">FukushimaJumpeiLoader</h3>
+<blockquote class="blockquote">
+<pre><code> FukushimaJumpeiLoader (src:pathlib.Path|str)</code></pre>
+</blockquote>
+<p><em>Load Fukushima (Jumpei) data.</em></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>src</td>
+<td>pathlib.Path | str</td>
+<td>Source directory</td>
+</tr>
+</tbody>
+</table>
+<div id="cell-17" class="cell">
+<details open="" class="code-fold">
+<summary>Exported source</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FukushimaJumpeiLoader(DataLoader):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"Load Fukushima (Jumpei) data."</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    fname <span class="op">=</span> <span class="st">'Fukushimaall_Average.csv'</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    analytes <span class="op">=</span> [<span class="st">'soil_total_Cs134'</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                <span class="st">'soil_total_Cs137'</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">'soil_ex_Cs137'</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">'exCs137_totalCs137'</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">'soil_water_soluble_K2O'</span>,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>                <span class="st">'soil_ex_K2O'</span>,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>                <span class="st">'TF_plant_totalCs137'</span>,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>                <span class="st">'TF_plant_exCs137'</span>,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>                <span class="st">'soil_pH'</span>,</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>                <span class="st">'soil_C'</span>,</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>                <span class="st">'soil_N'</span>,</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>                <span class="st">'soil_CN_ratio'</span>,</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>                <span class="st">'soil_CEC'</span>,</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>                <span class="st">'soil_MgO'</span>,</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>                <span class="st">'soil_CaO'</span>,</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>                <span class="st">'soil_P_absorption_coefficient'</span>,</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>                <span class="st">'avaiable_Pi'</span>,</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>                <span class="st">'course_sand'</span>,</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>                <span class="st">'fine_sand'</span>,</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>                <span class="st">'silt'</span>,</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>                <span class="st">'clay'</span>]</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, </span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>                 src: Path<span class="op">|</span><span class="bu">str</span>, <span class="co"># Source directory</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>                 ): </span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.src <span class="op">=</span> src <span class="cf">if</span> <span class="bu">isinstance</span>(src, Path) <span class="cf">else</span> Path(src)</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.ds_name_encoder <span class="op">=</span> LabelEncoder()</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> load_mir(<span class="va">self</span>, df):</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>        wn_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> df.columns <span class="cf">if</span> col.isdigit()]</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> df[wn_cols].values, np.array([<span class="bu">int</span>(col) <span class="cf">for</span> col <span class="kw">in</span> wn_cols])</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> load_wetchem(<span class="va">self</span>):</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>        fname <span class="op">=</span> <span class="va">self</span>.src <span class="op">/</span> <span class="va">self</span>.fname_wetchem</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pd.read_csv(fname)</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> separate_spectra_and_others(<span class="va">self</span>, df_merged: pd.DataFrame) <span class="op">-&gt;</span> <span class="bu">tuple</span>:</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>        <span class="co">"Separate the merged dataframe into spectral data and metadata."</span></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>        spectral_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> df_merged.columns <span class="cf">if</span> col.isdigit()]</span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>        metadata_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> df_merged.columns <span class="cf">if</span> <span class="kw">not</span> col.isdigit()]</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>        df_spectra <span class="op">=</span> df_merged[spectral_cols]</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>        df_others <span class="op">=</span> df_merged[metadata_cols]</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> df_spectra, df_others</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> make_idx(<span class="va">self</span>, df: pd.DataFrame) <span class="op">-&gt;</span> pd.DataFrame:</span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>        <span class="co">"Make a unique index for the samples."</span></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (df.iloc[:, :<span class="dv">3</span>].astype(<span class="bu">str</span>).<span class="bu">apply</span>(<span class="st">'-'</span>.join, axis<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _encode_dataset_names(<span class="va">self</span>, df: pd.DataFrame):</span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.ds_name_encoder.fit_transform(df)</span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> load_data(<span class="va">self</span>,</span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>                  analytes: <span class="bu">str</span><span class="op">|</span><span class="bu">list</span><span class="op">=</span><span class="va">None</span>, <span class="co"># Analytes of interest</span></span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>                  ) <span class="op">-&gt;</span> <span class="bu">tuple</span>:</span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>        <span class="co">"Load Ringtrial data and return SpectralData."</span></span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>        df <span class="op">=</span> pd.read_csv(<span class="va">self</span>.src <span class="op">/</span> <span class="va">self</span>.fname, low_memory<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>        X, X_names <span class="op">=</span> <span class="va">self</span>.load_mir(df)</span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> analytes <span class="kw">is</span> <span class="va">None</span>: analytes <span class="op">=</span> <span class="va">self</span>.analytes</span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>        <span class="co"># y = df[analytes].values</span></span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> df[analytes].<span class="bu">apply</span>(pd.to_numeric, errors<span class="op">=</span><span class="st">'coerce'</span>).values</span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a>        y_names <span class="op">=</span> np.array(analytes)</span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a>        smp_indices <span class="op">=</span> <span class="va">self</span>.make_idx(df).values</span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a>        ds_name <span class="op">=</span> <span class="va">self</span>._encode_dataset_names(pd.Series([<span class="st">'fukushima-jumpei'</span>] <span class="op">*</span> <span class="bu">len</span>(df), index<span class="op">=</span>df.index))</span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> SpectralData(</span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a>            X<span class="op">=</span>X,</span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>            X_names<span class="op">=</span>X_names,</span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span>y,</span>
+<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>            y_names<span class="op">=</span>y_names,</span>
+<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a>            sample_indices<span class="op">=</span>smp_indices,</span>
+<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a>            dataset_names<span class="op">=</span>ds_name,</span>
+<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a>            dataset_labels<span class="op">=</span><span class="va">self</span>.ds_name_encoder.classes_</span>
+<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="cell-18" class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>src <span class="op">=</span> Path.home() <span class="op">/</span> <span class="st">'pro/data/fk-jumpei'</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>loader <span class="op">=</span> FukushimaJumpeiLoader(src)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> loader.load_data()</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'X shape: </span><span class="sc">{</span>data<span class="sc">.</span>X<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y shape: </span><span class="sc">{</span>data<span class="sc">.</span>y<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'wavenumbers: </span><span class="sc">{</span>data<span class="sc">.</span>X_names<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Analytes: </span><span class="sc">{</span>data<span class="sc">.</span>y_names<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'smp_idx: </span><span class="sc">{</span>data<span class="sc">.</span>sample_indices<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'ds_name: </span><span class="sc">{</span>data<span class="sc">.</span>dataset_names<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'ds_label: </span><span class="sc">{</span>data<span class="sc">.</span>dataset_labels<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>plot_spectra(data, n_spectra<span class="op">=</span><span class="dv">100</span>, snv<span class="op">=</span><span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">3</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>X shape: (635, 1675)
+y shape: (635, 21)
+wavenumbers: [ 650  652  654 ... 3996 3998 4000]
+Analytes: ['soil_total_Cs134' 'soil_total_Cs137' 'soil_ex_Cs137'
+ 'exCs137_totalCs137' 'soil_water_soluble_K2O' 'soil_ex_K2O'
+ 'TF_plant_totalCs137' 'TF_plant_exCs137' 'soil_pH' 'soil_C' 'soil_N'
+ 'soil_CN_ratio' 'soil_CEC' 'soil_MgO' 'soil_CaO'
+ 'soil_P_absorption_coefficient' 'avaiable_Pi' 'course_sand' 'fine_sand'
+ 'silt' 'clay']
+smp_idx: ['20-2013-paddy_rice' '28-2014-paddy_rice' '33-2014-paddy_rice'
+ '35-2014-paddy_rice' '36-2014-paddy_rice' '38-2014-paddy_rice'
+ '40-2014-paddy_rice' '41-2014-paddy_rice' '44-2014-paddy_rice'
+ '49-2014-paddy_rice' '51-2015-paddy_rice' '53-2015-paddy_rice'
+ '58-2015-paddy_rice' '64-2015-paddy_rice' '66-2015-paddy_rice'
+ '68-2015-paddy_rice' '69-2015-paddy_rice' '72-2015-paddy_rice'
+ '73-2015-paddy_rice' '74-2015-paddy_rice' '75-2015-paddy_rice'
+ '78-2015-paddy_rice' '80-2016-paddy_rice' '81-2016-paddy_rice'
+ '85-2016-paddy_rice' '93-2016-paddy_rice' '94-2016-paddy_rice'
+ '95-2016-paddy_rice' '98-2016-paddy_rice' '100-2017-paddy_rice'
+ '101-2017-paddy_rice' '102-2017-paddy_rice' '103-2017-paddy_rice'
+ '104-2017-paddy_rice' '105-2013-paddy_rice' '106-2013-paddy_rice'
+ '108-2013-paddy_rice' '109-2013-paddy_rice' '110-2013-paddy_rice'
+ '111-2013-paddy_rice' '112-2013-paddy_rice' '113-2013-paddy_rice'
+ '114-2013-paddy_rice' '115-2013-paddy_rice' '116-2013-paddy_rice'
+ '117-2013-paddy_rice' '118-2013-paddy_rice' '119-2013-paddy_rice'
+ '120-2014-paddy_rice' '121-2014-paddy_rice' '122-2014-paddy_rice'
+ '125-2014-paddy_rice' '128-2014-paddy_rice' '129-2014-paddy_rice'
+ '130-2014-paddy_rice' '131-2014-paddy_rice' '133-2015-paddy_rice'
+ '135-2015-paddy_rice' '137-2015-paddy_rice' '140-2015-paddy_rice'
+ '142-2015-paddy_rice' '144-2015-paddy_rice' '145-2015-paddy_rice'
+ '146-2015-paddy_rice' '147-2015-paddy_rice' '148-2015-paddy_rice'
+ '149-2015-paddy_rice' '150-2015-paddy_rice' '152-2015-paddy_rice'
+ '154-2015-paddy_rice' '157-2016-paddy_rice' '158-2016-paddy_rice'
+ '159-2016-paddy_rice' '160-2016-paddy_rice' '161-2016-paddy_rice'
+ '163-2016-paddy_rice' '164-2016-paddy_rice' '166-2016-paddy_rice'
+ '167-2016-paddy_rice' '168-2016-paddy_rice' '169-2016-paddy_rice'
+ '170-2016-paddy_rice' '175-2017-paddy_rice' '176-2017-paddy_rice'
+ '177-2017-paddy_rice' '178-2017-paddy_rice' '181-2017-paddy_rice'
+ '182-2017-paddy_rice' '190-2017-paddy_rice' '193-2017-paddy_rice'
+ '195-2017-paddy_rice' '196-2017-paddy_rice' '197-2017-paddy_rice'
+ '198-2017-paddy_rice' '199-2017-paddy_rice' '200-2017-paddy_rice'
+ '201-2017-paddy_rice' '203-2017-paddy_rice' '204-2017-paddy_rice'
+ '205-2017-paddy_rice' '206-2017-paddy_rice' '207-2017-paddy_rice'
+ '208-2017-paddy_rice' '212-2017-paddy_rice' '213-2017-paddy_rice'
+ '214-2017-paddy_rice' '215-2017-paddy_rice' '216-2017-paddy_rice'
+ '217-2017-paddy_rice' '218-2017-paddy_rice' '219-2017-paddy_rice'
+ '220-2017-paddy_rice' '221-2017-paddy_rice' '222-2017-paddy_rice'
+ '223-2017-paddy_rice' '224-2017-paddy_rice' '225-2017-paddy_rice'
+ '226-2017-paddy_rice' '227-2017-paddy_rice' '228-2017-paddy_rice'
+ '229-2017-paddy_rice' '230-2017-paddy_rice' '231-2017-paddy_rice'
+ '232-2017-paddy_rice' '233-2017-paddy_rice' '235-2017-paddy_rice'
+ '236-2017-paddy_rice' '237-2017-paddy_rice' '238-2017-paddy_rice'
+ '239-2017-paddy_rice' '241-2017-paddy_rice' '242-2017-paddy_rice'
+ '244-2017-paddy_rice' '245-2017-paddy_rice' '246-2017-paddy_rice'
+ '247-2017-paddy_rice' '248-2017-paddy_rice' '250-2017-paddy_rice'
+ '251-2017-paddy_rice' '252-2017-paddy_rice' '253-2017-paddy_rice'
+ '254-2017-paddy_rice' '255-2017-paddy_rice' '256-2017-paddy_rice'
+ '258-2017-paddy_rice' '259-2017-paddy_rice' '260-2017-paddy_rice'
+ '261-2017-paddy_rice' '262-2018-paddy_rice' '263-2018-paddy_rice'
+ '264-2018-paddy_rice' '265-2018-paddy_rice' '266-2018-paddy_rice'
+ '267-2018-paddy_rice' '268-2018-paddy_rice' '269-2018-paddy_rice'
+ '271-2018-paddy_rice' '272-2018-paddy_rice' '273-2018-paddy_rice'
+ '274-2018-paddy_rice' '275-2018-paddy_rice' '276-2018-paddy_rice'
+ '277-2018-paddy_rice' '278-2018-paddy_rice' '279-2018-paddy_rice'
+ '289-2019-paddy_rice' '290-2019-paddy_rice' '291-2019-paddy_rice'
+ '292-2019-paddy_rice' '293-2019-paddy_rice' '294-2019-paddy_rice'
+ '295-2019-paddy_rice' '296-2019-paddy_rice' '297-2019-paddy_rice'
+ '298-2019-paddy_rice' '299-2019-paddy_rice' '691-2014-paddy_rice'
+ '694-2014-paddy_rice' '699-2014-paddy_rice' '703-2014-paddy_rice'
+ '707-2014-paddy_rice' '722-2014-soybean' '726-2014-paddy_rice'
+ '729-2014-paddy_rice' '732-2014-paddy_rice' '735-2014-paddy_rice'
+ '738-2014-paddy_rice' '741-2014-paddy_rice' '743-2014-paddy_rice'
+ '744-2014-paddy_rice' '745-2014-paddy_rice' '747-2014-soybean'
+ '749-2014-soybean' '752-2014-soybean' '755-2014-soybean'
+ '758-2014-soybean' '764-2014-soybean' '769-2014-paddy_rice'
+ '771-2014-soybean' '774-2014-soybean' '775-2014-buckwheat'
+ '798-2014-paddy_rice' '802-2014-soybean' '805-2014-soybean'
+ '808-2014-soybean' '811-2014-soybean' '813-2014-soybean'
+ '816-2014-soybean' '819-2014-soybean' '822-2014-soybean'
+ '825-2014-buckwheat' '827-2014-soybean' '829-2014-soybean'
+ '831-2014-soybean' '836-2014-paddy_rice' '840-2014-paddy_rice'
+ '844-2014-paddy_rice' '859-2014-paddy_rice' '861-2014-soybean'
+ '867-2014-soybean' '869-2014-soybean' '872-2014-soybean'
+ '874-2014-soybean' '884-2014-paddy_rice' '888-2014-paddy_rice'
+ '905-2014-paddy_rice' '908-2014-paddy_rice' '912-2014-paddy_rice'
+ '915-2014-soybean' '919-2014-soybean' '921-2014-paddy_rice'
+ '923-2014-paddy_rice' '925-2014-soybean' '927-2014-soybean'
+ '928-2014-soybean' '930-2014-buckwheat' '934-2014-paddy_rice'
+ '946-2014-paddy_rice' '951-2014-paddy_rice' '959-2014-paddy_rice'
+ '961-2014-paddy_rice' '964-2014-paddy_rice' '966-2014-paddy_rice'
+ '968-2014-paddy_rice' '970-2014-paddy_rice' '972-2014-paddy_rice'
+ '973-2014-soybean' '974-2014-paddy_rice' '976-2014-paddy_rice'
+ '983-2014-paddy_rice' '989-2014-paddy_rice' '1019-2014-paddy_rice'
+ '1022-2014-paddy_rice' '1024-2014-paddy_rice' '1026-2014-paddy_rice'
+ '1031-2014-soybean' '1034-2014-paddy_rice' '1037-2014-paddy_rice'
+ '1041-2014-soybean' '1044-2014-buckwheat' '1046-2014-buckwheat'
+ '1048-2014-paddy_rice' '1050-2014-buckwheat' '1052-2014-buckwheat'
+ '1055-2014-paddy_rice' '1059-2014-buckwheat' '1062-2014-paddy_rice'
+ '1070-2014-paddy_rice' '1088-2014-paddy_rice' '1093-2014-soybean'
+ '1099-2014-buckwheat' '1104-2014-paddy_rice' '1106-2014-paddy_rice'
+ '1108-2014-buckwheat' '1111-2014-soybean' '1114-2014-paddy_rice'
+ '1115-2014-buckwheat' '1117-2014-buckwheat' '1123-2014-paddy_rice'
+ '1134-2014-buckwheat' '1139-2014-paddy_rice' '1143-2014-buckwheat'
+ '1147-2014-paddy_rice' '1152-2014-buckwheat' '1156-2014-buckwheat'
+ '1164-2014-soybean' '1165-2014-soybean' '1167-2014-soybean'
+ '1169-2014-buckwheat' '1182-2014-paddy_rice' '1188-2014-paddy_rice'
+ '1195-2014-paddy_rice' '1198-2014-buckwheat' '1201-2014-buckwheat'
+ '1204-2014-soybean' '1213-2014-buckwheat' '1217-2014-paddy_rice'
+ '1220-2014-buckwheat' '1224-2014-paddy_rice' '1230-2014-buckwheat'
+ '1234-2014-buckwheat' '1241-2014-paddy_rice' '1244-2014-buckwheat'
+ '1247-2014-buckwheat' '1249-2014-soybean' '1254-2014-paddy_rice'
+ '1260-2014-buckwheat' '1268-2014-paddy_rice' '1273-2014-buckwheat'
+ '1275-2014-paddy_rice' '1296-2014-paddy_rice' '1300-2014-paddy_rice'
+ '1305-2014-soybean' '1307-2014-paddy_rice' '1310-2014-soybean'
+ '1339-2014-paddy_rice' '1341-2014-paddy_rice' '1343-2014-paddy_rice'
+ '1347-2014-paddy_rice' '1350-2014-paddy_rice' '1351-2014-paddy_rice'
+ '1352-2014-paddy_rice' '1354-2014-paddy_rice' '1356-2014-paddy_rice'
+ '1357-2014-paddy_rice' '1361-2014-paddy_rice' '1362-2014-paddy_rice'
+ '1364-2014-paddy_rice' '1365-2014-paddy_rice' '1367-2014-paddy_rice'
+ '1368-2014-paddy_rice' '1369-2014-paddy_rice' '1370-2014-paddy_rice'
+ '1371-2014-paddy_rice' '1372-2014-paddy_rice' '1374-2014-paddy_rice'
+ '1375-2014-paddy_rice' '1376-2014-paddy_rice' '1416-2014-paddy_rice'
+ '1428-2014-paddy_rice' '1431-2014-paddy_rice' '1433-2014-buckwheat'
+ '1435-2014-buckwheat' '1440-2014-paddy_rice' '1445-2014-paddy_rice'
+ '1448-2014-paddy_rice' '1454-2014-buckwheat' '1457-2014-paddy_rice'
+ '1460-2014-buckwheat' '1465-2014-paddy_rice' '1468-2014-buckwheat'
+ '1471-2014-paddy_rice' '1473-2014-paddy_rice' '1474-2014-paddy_rice'
+ '1475-2014-paddy_rice' '1477-2014-paddy_rice' '1479-2014-paddy_rice'
+ '1481-2014-paddy_rice' '1484-2014-soybean' '1485-2014-soybean'
+ '1486-2014-buckwheat' '1488-2014-buckwheat' '1490-2014-paddy_rice'
+ '1492-2014-paddy_rice' '1494-2014-paddy_rice' '1496-2014-paddy_rice'
+ '1498-2014-paddy_rice' '1500-2014-paddy_rice' '1503-2014-soybean'
+ '1505-2014-soybean' '1507-2014-buckwheat' '1508-2014-buckwheat'
+ '1510-2014-paddy_rice' '1511-2014-paddy_rice' '1512-2014-paddy_rice'
+ '1984-2018-paddy_rice' '1985-2018-paddy_rice' '1986-2018-paddy_rice'
+ '1987-2018-soil' '1988-2018-paddy_rice' '1989-2018-soil'
+ '1990-2018-paddy_rice' '1991-2018-paddy_rice' '1992-2018-soybean'
+ '1993-2018-paddy_rice' '1994-2018-soil' '1995-2018-paddy_rice'
+ '1996-2018-buckwheat' '1997-2018-paddy_rice' '1998-2018-paddy_rice'
+ '1999-2018-paddy_rice' '2000-2018-paddy_rice' '2001-2018-soybean'
+ '2002-2018-soybean' '2003-2018-soil' '2004-2018-soil' '2005-2018-soybean'
+ '2006-2018-paddy_rice' '2007-2018-soybean' '2008-2018-soybean'
+ '2009-2018-soybean' '2010-2018-soil' '2011-2018-soil' '2012-2018-soybean'
+ '2013-2018-soybean' '2014-2018-soybean' '2015-2018-soil'
+ '2016-2018-soybean' '2017-2018-soil' '2018-2018-paddy_rice'
+ '2019-2018-paddy_rice' '2020-2018-soybean' '2021-2018-paddy_rice'
+ '2022-2018-soybean' '2023-2018-buckwheat' '2024-2018-paddy_rice'
+ '2025-2018-buckwheat' '2026-2018-paddy_rice' '2027-2018-soil'
+ '2028-2018-paddy_rice' '2029-2018-paddy_rice' '2030-2018-buckwheat'
+ '2031-2018-soybean' '2032-2018-paddy_rice' '2033-2018-buckwheat'
+ '2034-2018-paddy_rice' '2035-2018-buckwheat' '2036-2018-buckwheat'
+ '2037-2018-paddy_rice' '2038-2018-buckwheat' '2039-2018-buckwheat'
+ '2040-2018-buckwheat' '2041-2018-paddy_rice' '2042-2018-buckwheat'
+ '2043-2018-soil' '2044-2018-paddy_rice' '2045-2018-buckwheat'
+ '2046-2018-soybean' '2047-2018-soil' '2048-2018-paddy_rice'
+ '2049-2018-buckwheat' '2050-2018-paddy_rice' '2051-2018-paddy_rice'
+ '2052-2018-soybean' '2053-2018-soil' '2054-2018-buckwheat'
+ '2055-2018-buckwheat' '2056-2018-paddy_rice' '2057-2018-buckwheat'
+ '2058-2018-soil' '2059-2018-paddy_rice' '2060-2018-soil'
+ '2061-2018-buckwheat' '2062-2018-paddy_rice' '2063-2018-soil'
+ '2064-2018-soil' '2065-2018-paddy_rice' '2066-2018-paddy_rice'
+ '2067-2018-buckwheat' '2068-2018-soil' '2069-2018-paddy_rice'
+ '2070-2018-buckwheat' '2071-2018-paddy_rice' '2072-2018-paddy_rice'
+ '2073-2018-paddy_rice' '2074-2018-paddy_rice' '2075-2018-paddy_rice'
+ '2076-2018-paddy_rice' '2077-2018-paddy_rice' '2078-2018-paddy_rice'
+ '2079-2018-soil' '2080-2018-soil' '2081-2018-soil' '2082-2018-paddy_rice'
+ '2083-2018-paddy_rice' '2084-2018-paddy_rice' '2085-2018-soil'
+ '2086-2018-paddy_rice' '2087-2018-soil' '2088-2018-soil' '2089-2018-soil'
+ '2090-2018-paddy_rice' '2091-2018-paddy_rice' '2092-2018-soil'
+ '2093-2018-soil' '2094-2018-soil' '2095-2018-soil' '2096-2018-soil'
+ '2097-2018-soil' '2099-2018-paddy_rice' '2100-2018-paddy_rice'
+ '2101-2018-soybean' '2102-2018-soybean' '2103-2018-paddy_rice'
+ '2104-2018-paddy_rice' '2105-2018-paddy_rice' '2106-2018-paddy_rice'
+ '2107-2018-paddy_rice' '2108-2018-paddy_rice' '2109-2018-paddy_rice'
+ '2110-2018-paddy_rice' '2111-2018-paddy_rice' '2112-2018-paddy_rice'
+ '2113-2018-paddy_rice' '2114-2018-paddy_rice' '2115-2018-paddy_rice'
+ '2116-2018-paddy_rice' '2117-2018-soil' '2118-2018-paddy_rice'
+ '2119-2018-paddy_rice' '2120-2018-paddy_rice' '2121-2018-soil'
+ '2122-2018-paddy_rice' '2123-2018-paddy_rice' '2124-2018-soybean'
+ '2125-2018-paddy_rice' '2126-2018-soil' '2127-2018-paddy_rice'
+ '2128-2018-paddy_rice' '2129-2018-paddy_rice' '2130-2018-paddy_rice'
+ '2131-2018-paddy_rice' '2132-2018-paddy_rice' '2133-2018-soil'
+ '2134-2018-soil' '2135-2018-soil' '2136-2018-paddy_rice'
+ '2137-2018-paddy_rice' '2138-2018-paddy_rice' '2139-2018-paddy_rice'
+ '2140-2018-paddy_rice' '2141-2018-paddy_rice' '2142-2018-paddy_rice'
+ '2143-2018-paddy_rice' '2144-2018-paddy_rice' '2145-2018-paddy_rice'
+ '2146-2018-paddy_rice' '2147-2018-paddy_rice' '2148-2018-paddy_rice'
+ '2149-2018-paddy_rice' '2150-2018-paddy_rice' '2151-2018-paddy_rice'
+ '2152-2018-soil' '2153-2018-paddy_rice' '2154-2018-paddy_rice'
+ '2155-2018-paddy_rice' '2156-2018-paddy_rice' '2157-2018-soil'
+ '2158-2018-soybean' '2159-2018-paddy_rice' '2160-2018-paddy_rice'
+ '2161-2018-buckwheat' '2162-2018-paddy_rice' '2163-2018-paddy_rice'
+ '2164-2018-soybean' '2165-2018-paddy_rice' '2166-2018-paddy_rice'
+ '2167-2018-paddy_rice' '2168-2018-buckwheat' '2169-2018-soybean'
+ '2170-2018-soybean' '2171-2018-soybean' '2172-2018-soybean'
+ '2173-2018-maize' '2174-2018-paddy_rice' '2175-2018-buckwheat'
+ '2176-2018-paddy_rice' '2177-2018-soil' '2178-2018-paddy_rice'
+ '2179-2018-paddy_rice' '2180-2018-soybean' '2181-2018-paddy_rice'
+ '2182-2018-paddy_rice' '2183-2018-paddy_rice' '2184-2018-soil'
+ '2368-2020-paddy_rice' '2369-2020-paddy_rice' '2374-2020-soil_only'
+ '2376-2020-soybean' '2389-2020-paddy_rice' '2390-2020-soil_only'
+ '2391-2020-paddy_rice' '2392-2020-soybean' '2394-2020-soil_only'
+ '2395-2020-paddy_rice' '2396-2020-soil_only' '2397-2020-soil_only'
+ '2398-2020-soybean' '2399-2020-soybean' '2400-2020-soil_only'
+ '2401-2020-soil_only' '2402-2020-paddy_rice' '2403-2020-soybean'
+ '2404-2020-soybean' '2405-2020-soybean' '2406-2020-soil_only'
+ '2407-2020-soil_only' '2408-2020-soil_only' '2409-2020-paddy_rice'
+ '2410-2020-paddy_rice' '2413-2020-buckwheat' '2414-2020-paddy_rice'
+ '2415-2020-buckwheat' '2416-2020-paddy_rice' '2417-2020-soybean'
+ '2419-2020-paddy_rice' '2421-2020-soil_only' '2422-2020-paddy_rice'
+ '2423-2020-buckwheat' '2424-2020-buckwheat' '2425-2020-soil_only'
+ '2426-2020-paddy_rice' '2427-2020-buckwheat' '2428-2020-soil_only'
+ '2429-2020-paddy_rice' '2430-2020-buckwheat' '2431-2020-paddy_rice'
+ '2432-2020-paddy_rice' '2433-2020-buckwheat' '2434-2020-paddy_rice'
+ '2435-2020-paddy_rice' '2436-2020-soybean' '2437-2020-soil_only'
+ '2438-2020-buckwheat' '2439-2020-paddy_rice' '2440-2020-buckwheat'
+ '2442-2020-soil_only' '2443-2020-soil_only' '2444-2020-paddy_rice'
+ '2445-2020-buckwheat' '2446-2020-paddy_rice' '2447-2020-soil_only'
+ '2448-2020-paddy_rice' '2517-2020-paddy_rice' '2532-2020-buckwheat']
+ds_name: [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0]
+ds_label: ['fukushima-jumpei']</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="00_loading_files/figure-html/cell-14-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="ringtrial-data" class="level2">
+<h2 class="anchored" data-anchor-id="ringtrial-data">Ringtrial data</h2>
+<p>Describe Ringtrial …</p>
+<hr>
+<p><a href="https://github.com/franckalbinet/uhina/blob/main/uhina/loading.py#L268" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="ringtrialloader" class="level3">
+<h3 class="anchored" data-anchor-id="ringtrialloader">RingtrialLoader</h3>
+<blockquote class="blockquote">
+<pre><code> RingtrialLoader
+                  (src:pathlib.Path|str=Path('/home/runner/pro/data/woodwe
+                  ll-ringtrial/drive-download-20231013T123706Z-001'))</code></pre>
+</blockquote>
+<p><em>Load Ringtrial data.</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>src</td>
+<td>pathlib.Path | str</td>
+<td>/home/runner/pro/data/woodwell-ringtrial/drive-download-20231013T123706Z-001</td>
+<td>Source directory</td>
+</tr>
+</tbody>
+</table>
+<div id="cell-21" class="cell">
+<details open="" class="code-fold">
+<summary>Exported source</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>src_dir_rt <span class="op">=</span> Path.home() <span class="op">/</span> <span class="st">'pro/data/woodwell-ringtrial/drive-download-20231013T123706Z-001'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="cell-22" class="cell">
+<details open="" class="code-fold">
+<summary>Exported source</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> RingtrialLoader(DataLoader):</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"Load Ringtrial data."</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    fname_mir <span class="op">=</span> <span class="st">'RT_STD_allMIRspectra_raw.csv'</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    fname_wetchem <span class="op">=</span> <span class="st">'RT_wetchem_soildata.csv'</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>                 src: Path<span class="op">|</span><span class="bu">str</span> <span class="op">=</span> src_dir_rt, <span class="co"># Source directory</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>                <span class="co">#  target: str = 'soil_ex_K2O', # Target analyte</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>                 ): <span class="co"># Spectra type configuration</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.src <span class="op">=</span> src <span class="cf">if</span> <span class="bu">isinstance</span>(src, Path) <span class="cf">else</span> Path(src)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.ds_name_encoder <span class="op">=</span> LabelEncoder()</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> load_mir(<span class="va">self</span>):</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>        fname <span class="op">=</span> <span class="va">self</span>.src <span class="op">/</span> <span class="va">self</span>.fname_mir</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pd.read_csv(fname)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> load_wetchem(<span class="va">self</span>):</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        fname <span class="op">=</span> <span class="va">self</span>.src <span class="op">/</span> <span class="va">self</span>.fname_wetchem</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pd.read_csv(fname)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> separate_spectra_and_others(<span class="va">self</span>, df_merged: pd.DataFrame) <span class="op">-&gt;</span> <span class="bu">tuple</span>:</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>        <span class="co">"Separate the merged dataframe into spectral data and metadata."</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>        spectral_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> df_merged.columns <span class="cf">if</span> col.isdigit()]</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>        metadata_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> df_merged.columns <span class="cf">if</span> <span class="kw">not</span> col.isdigit()]</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>        df_spectra <span class="op">=</span> df_merged[spectral_cols]</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>        df_others <span class="op">=</span> df_merged[metadata_cols]</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> df_spectra, df_others</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> make_idx(<span class="va">self</span>, df: pd.DataFrame) <span class="op">-&gt;</span> pd.DataFrame:</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>        <span class="co">"Make a unique index for the samples."</span></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (df[<span class="st">'organization'</span>] <span class="op">+</span> <span class="st">'-'</span> <span class="op">+</span> df[<span class="st">'sample_id'</span>]).<span class="bu">str</span>.lower().<span class="bu">str</span>.replace(<span class="st">'_'</span>, <span class="st">'-'</span>)</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _encode_dataset_names(<span class="va">self</span>, df: pd.DataFrame):</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.ds_name_encoder.fit_transform(df)</span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> load_data(<span class="va">self</span>,</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>                  analytes: <span class="bu">str</span><span class="op">|</span><span class="bu">list</span><span class="op">=</span><span class="st">'potassium_cmolkg'</span>, <span class="co"># Analytes of interest</span></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>                  ) <span class="op">-&gt;</span> <span class="bu">tuple</span>:</span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>        <span class="co">"Load Ringtrial data and return (X, y, X_names, smp_idx, ds_name, ds_label)."</span></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>        df_merged <span class="op">=</span> pd.merge(<span class="va">self</span>.load_mir(), </span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>                            <span class="va">self</span>.load_wetchem().rename(columns<span class="op">=</span>{<span class="st">'</span><span class="ch">\t</span><span class="st">sample_id'</span>: <span class="st">'sample_id'</span>}),</span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>                            on<span class="op">=</span><span class="st">'sample_id'</span>, how<span class="op">=</span><span class="st">'inner'</span>)</span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>        df_spectra, df_others <span class="op">=</span> <span class="va">self</span>.separate_spectra_and_others(df_merged)</span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>        X <span class="op">=</span> df_spectra.values</span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>        analytes <span class="op">=</span> [analytes] <span class="cf">if</span> <span class="bu">isinstance</span>(analytes, <span class="bu">str</span>) <span class="cf">else</span> analytes</span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> df_others[analytes].values</span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>        y_names <span class="op">=</span> np.array(analytes)</span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>        X_names <span class="op">=</span> df_spectra.columns.astype(<span class="bu">int</span>).values</span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>        smp_indices <span class="op">=</span> <span class="va">self</span>.make_idx(df_others).values</span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>        ds_name <span class="op">=</span> <span class="va">self</span>._encode_dataset_names(df_others[<span class="st">'organization'</span>])</span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> SpectralData(</span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a>            X<span class="op">=</span>X,</span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a>            X_names<span class="op">=</span>X_names,</span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span>y,</span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>            y_names<span class="op">=</span>y_names,</span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>            sample_indices<span class="op">=</span>smp_indices,</span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>            dataset_names<span class="op">=</span>ds_name,</span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>            dataset_labels<span class="op">=</span><span class="va">self</span>.ds_name_encoder.classes_</span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="cell-23" class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>src <span class="op">=</span> Path.home() <span class="op">/</span> <span class="st">'pro/data/woodwell-ringtrial/drive-download-20231013T123706Z-001'</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>loader <span class="op">=</span> RingtrialLoader(src)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> RingtrialLoader().load_data()</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'X shape: </span><span class="sc">{</span>data<span class="sc">.</span>X<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y shape: </span><span class="sc">{</span>data<span class="sc">.</span>y<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'wavenumbers: </span><span class="sc">{</span>data<span class="sc">.</span>X_names<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Analytes: </span><span class="sc">{</span>data<span class="sc">.</span>y_names<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'smp_idx: </span><span class="sc">{</span>data<span class="sc">.</span>sample_indices<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'ds_name: </span><span class="sc">{</span>data<span class="sc">.</span>dataset_names<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'ds_label: </span><span class="sc">{</span>data<span class="sc">.</span>dataset_labels<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>plot_spectra(data, n_spectra<span class="op">=</span><span class="dv">100</span>, snv<span class="op">=</span><span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">3</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>X shape: (1400, 1676)
+y shape: (1400, 1)
+wavenumbers: [ 650  652  654 ... 3996 3998 4000]
+Analytes: ['potassium_cmolkg']
+smp_idx: ['agrocares-rt-01' 'agrocares-rt-02' 'agrocares-rt-03' ...
+ 'woodwell-vertex-rt-68' 'woodwell-vertex-rt-69' 'woodwell-vertex-rt-70']
+ds_name: [ 0  0  0 ... 19 19 19]
+ds_label: ['Agrocares' 'Argonne' 'CSU_IL' 'ETH_alpha_1' 'ETH_alpha_2' 'ETH_vertex'
+ 'IAEA_aug2022' 'KSSL' 'LandCare' 'Lesotho' 'MSU' 'OSU' 'Rothamsted'
+ 'Scion' 'UGhent' 'UIUC' 'USP' 'UWisc_fine' 'Woodwell_alpha'
+ 'Woodwell_vertex']</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="00_loading_files/figure-html/cell-18-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="loader-factory" class="level2">
+<h2 class="anchored" data-anchor-id="loader-factory">Loader factory</h2>
+<p>This is a factory class to get the appropriate loader for a given dataset.</p>
+<hr>
+<p><a href="https://github.com/franckalbinet/uhina/blob/main/uhina/loading.py#L331" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="loaderfactory" class="level3">
+<h3 class="anchored" data-anchor-id="loaderfactory">LoaderFactory</h3>
+<blockquote class="blockquote">
+<pre><code> LoaderFactory ()</code></pre>
+</blockquote>
+<p><em>Initialize self. See help(type(self)) for accurate signature.</em></p>
+<div id="cell-26" class="cell">
+<details open="" class="code-fold">
+<summary>Exported source</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LoaderFactory:</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">@staticmethod</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_loader(src: Path, dataset: <span class="bu">str</span>, <span class="op">**</span>kwargs) <span class="op">-&gt;</span> DataLoader:</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> dataset <span class="op">==</span> <span class="st">'ossl'</span>:</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> OSSLLoader(src, <span class="op">**</span>kwargs)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> dataset <span class="op">==</span> <span class="st">'ringtrial'</span>:</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> RingtrialLoader(src)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> dataset <span class="op">==</span> <span class="st">'fk-jumpei'</span>:</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> FukushimaJumpeiLoader(src)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"Dataset </span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss"> not supported yet ..."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="cell-27" class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>src <span class="op">=</span> Path.home() <span class="op">/</span> <span class="st">'pro/data/woodwell-ringtrial/drive-download-20231013T123706Z-001'</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>loader <span class="op">=</span> LoaderFactory.get_loader(src, <span class="st">'ringtrial'</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> loader.load_data(analytes<span class="op">=</span><span class="st">'potassium_cmolkg'</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'X shape: </span><span class="sc">{</span>data<span class="sc">.</span>X<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>X shape: (1400, 1676)</code></pre>
+</div>
+</div>
+<div id="cell-28" class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>src <span class="op">=</span> Path.home() <span class="op">/</span> <span class="st">'.lssm/data/ossl/ossl_all_L0_v1.2.csv.gz'</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>loader <span class="op">=</span> LoaderFactory.get_loader(src, <span class="st">'ossl'</span>, spectra_type<span class="op">=</span><span class="st">'mir'</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> loader.load_data(analytes<span class="op">=</span><span class="st">'k.ext_usda.a725_cmolc.kg'</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'X shape: </span><span class="sc">{</span>data<span class="sc">.</span>X<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Loading data from /Users/franckalbinet/.lssm/data/ossl/ossl_all_L0_v1.2.csv.gz ...
+X shape: (57674, 1676)</code></pre>
+</div>
+</div>
+<div id="cell-29" class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>src <span class="op">=</span> Path.home() <span class="op">/</span> <span class="st">'pro/data/fk-jumpei'</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>loader <span class="op">=</span> LoaderFactory.get_loader(src, <span class="st">'fk-jumpei'</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> loader.load_data()</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'X shape: </span><span class="sc">{</span>data<span class="sc">.</span>X<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>X shape: (635, 1675)</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/franckalbinet\.github\.io\/uhina");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/franckalbinet/uhina/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
